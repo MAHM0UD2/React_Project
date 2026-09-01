@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
-import addItem from './CartSlice';
+import { addItem } from './CartSlice';
 import { useSelector, useDispatch } from "react-redux";
 function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
@@ -300,7 +300,10 @@ function ProductList({ onHomeClick }) {
                                         <div className='product-title'>{plant.name}</div>
                                         <div className="product-description">{plant.description}</div>
                                         <div className='product-price'>{plant.cost}</div>
-                                        <button className="product-button" onClick={() => handleAddToCart(plant)}>Add to Cart</button>
+                                        <button 
+                                            className={`product-button ${addedToCart?.[plant.name] ? 'added-to-cart' : ''}`} onClick={() => handleAddToCart(plant)}>
+                                                {addedToCart?.[plant.name] ? 'Added' : 'Add to Cart'}
+                                        </button>
                                     </div>
                                 ))}
                             </div>
